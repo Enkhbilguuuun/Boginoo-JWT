@@ -13,7 +13,9 @@ export const verifyJWT = (req, res, next) => {
   jwt.verify(req.body.token, "secretkey", (err, result) => {
     if (err) {
       return res.status(403).send(err);
+    } else {
+      next();
+      return result;
     }
-    next();
   });
 };

@@ -10,20 +10,19 @@ function Signin(){
     const [pass, setPass] = useState();
     const [data, setData] = useState("")
     const createUser = async () => {
-      const res = await instance.post("/users/signin", {
-        email: email,
-        password: pass,
-      });
-      setData(res.data.data);
-      console.log(res.data.data._id)
-      if(res.data.data.email === email && res.data.data.password === pass){
-        window.localStorage.setItem("Token", res.data.data.Token);
-          alert("amjilttai nevterlei")
-         window.location.replace(`/user/${res.data.data._id}`);
+      try {
+        const res = await instance.post("/users/signin", {
+          email: email,
+          password: pass,
+        });
+        setData(res.data.data);
+        console.log(res.data.token)
+        window.localStorage.setItem("Token", JSON.stringify(res.data.token));
+        window.location.replace(`/user/${res.data.data._id}`)
+      } catch (error) {
+        console.log(error)
       }
-      else{
-        alert("email ymu pass buruu bn")
-      }
+      
     };
     return(
         <div className="signinhome">

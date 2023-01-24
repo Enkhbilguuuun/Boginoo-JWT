@@ -17,6 +17,8 @@ function HomeLogged() {
   const getData = async () => {
     const res = await instance.post("/links", {
       Longlink: data2,
+      token: JSON.parse(localStorage.getItem("Token"))
+
     });
     setData(res.data.data.Shortlink);
   };

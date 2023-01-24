@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({});
-    console.log("ajillaj bn")
+    console.log("ajillaj bn");
     res.send({
       data: users,
     });
@@ -24,13 +24,12 @@ export const createUser = async (req, res) => {
         expiresIn: "100000",
       }
     );
-    console.log("token irj bn", token);
-    const user = await User.create({ ...req.body, Token: token });
 
+    const user = await User.create({ ...req.body, token: token });
+    console.log(user);
     res.status(200).send({
       status: "complete",
       data: user,
-      token: token,
     });
   } catch (error) {
     res.status(400).send({
@@ -42,25 +41,38 @@ export const createUser = async (req, res) => {
 export const userLogIn = async (req, res) => {
   try {
     const { email, password } = req.body;
+    const token = jwt.sign(
+      {
+        email: req.body.email,
+        password: req.body.password,
+      },
+      "secretkey",
+      {
+        expiresIn: 30,
+      }
+    );
     const user = await User.findOne({
       email: email,
     });
+    const isMatch = await user.comparePassword(password);
+    console.log(isMatch);
+    if (!isMatch) {
+      res.send("isMatch");
+    }
     if (user) {
-      if (user.password !== password) {
-        throw new Error("email or pass is wrong");
-      }
       res.status(200).send({
         data: user,
+        token: token,
       });
     } else {
-      res.status(400).send({
-        data: "user not found",
+      res.status(404).send({
+        data: "tiim user bhq bn",
       });
     }
   } catch (error) {
     res.status(400).send({
       success: false,
-      data: error.message,
+      error: error.message,
     });
   }
 };

@@ -8,6 +8,9 @@ const LinkSchema = new mongoose.Schema({
     },
     Shortlink:{
         type:String,
+    },
+    token:{
+        type:String,
     }
 })
 
