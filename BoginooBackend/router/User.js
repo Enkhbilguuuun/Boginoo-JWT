@@ -8,10 +8,7 @@ import {
   removeUser,
   userLogIn,
 } from "../controller/user.js";
-import {
-  myFirstMiddleware,
-  verifyJWT
-} from "../middleware/middleware.js"
+import { myFirstMiddleware, verifyJWT } from "../middleware/middleware.js";
 
 const router = express.Router();
 
@@ -34,7 +31,7 @@ const router = express.Router();
 //   });
 // };
 
-router.route("/").get(verifyJWT).get(getAllUsers).post(createUser);
+router.route("/").get(getAllUsers).post(createUser);
 router.route("/signin").post(userLogIn);
 router.route("/:id").get(userById).put(updateUser).delete(removeUser);
 

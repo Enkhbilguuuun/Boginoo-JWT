@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find({});
+    const users = await User.find({}).populate("links");
     console.log("ajillaj bn");
     res.send({
       data: users,
@@ -48,14 +48,16 @@ export const userLogIn = async (req, res) => {
       },
       "secretkey",
       {
-        expiresIn: 30,
+        expiresIn: 30000000000000,
       }
     );
     const user = await User.findOne({
       email: email,
-    });
+    }).populate("links");
+
     const isMatch = await user.comparePassword(password);
     console.log(isMatch);
+
     if (!isMatch) {
       res.send("isMatch");
     }
@@ -81,7 +83,7 @@ export const userById = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const user = await User.findById(id);
+    const user = await User.findById(id).populate("links");
 
     res.status(200).send({
       data: user,

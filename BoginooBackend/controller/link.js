@@ -17,8 +17,9 @@ export const getAlllinks = async (req, res) => {
 
 export const createlink = async (req, res) => {
   try {
+    // const owner = res.locals.userId;
     const shortlink = nanoid(4); //=> "V1StGXR8_Z5jdHi6B-myT"
-    const link = await Link.create({ ...req.body, Shortlink: shortlink });
+    const link = await await Link.create({ ...req.body, Shortlink: shortlink });
     res.status(200).send({
       success: true,
       data: link,

@@ -43,9 +43,29 @@
   border: 0.5px solid gray;
 }
 
+.hisspan{
+  height: 35px;
+  width:auto;
+  background-color:#02b589;
+  border-radius: 25px;
+  color: white;
+  font-size: 20px;
+}
+.hiscont{
+  height: 90px;
+  width: auto;
+  overflow:scroll;
+  position: absolute;
+  right: 30px;
+}
+
+.result2{
+  display: inline-block;
+}
+
 .result{
   height: 100px;
-  width: auto;
+  width: 500px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;

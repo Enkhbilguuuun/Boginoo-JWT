@@ -16,6 +16,7 @@ function Signin(){
           password: pass,
         });
         setData(res.data.data);
+        console.log(res)
         console.log(res.data.token)
         window.localStorage.setItem("Token", JSON.stringify(res.data.token));
         window.location.replace(`/user/${res.data.data._id}`)

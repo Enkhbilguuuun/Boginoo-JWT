@@ -1,18 +1,29 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-const UserSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: [true, "zaavl baih ystoi"],
+const UserSchema = new mongoose.Schema(
+  {
+    email: {
+      type: String,
+      required: [true, "zaavl baih ystoi"],
+    },
+    password: {
+      type: String,
+      required: [true],
+    },
+    token: {
+      type: String,
+      
+    },
+
   },
-  password: {
-    type: String,
-    required: [true],
-  },
-  token: {
-    type: String,
-  },
+  { toJSON: { virtuals: true }, toObject: { virtuals: true } }
+);
+
+UserSchema.virtual("links", {
+  ref: "Link",
+  localField: "_id",
+  foreignField: "user_id",
 });
 
 // UserSchema.path("username").validate((firstName) => {
