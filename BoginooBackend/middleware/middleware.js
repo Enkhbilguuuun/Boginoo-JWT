@@ -19,3 +19,21 @@ export const verifyJWT = (req, res, next) => {
     }
   });
 };
+
+// export const verifyRole = () => {
+//   return (req, res, next) => {
+//     if (!req?.body.roles) return res.sendStatus(401);
+//     if (req.body.role === 'admin') next()
+//     else if (!result) return res.sendStatus(401);
+//     next();
+//   };
+// };
+
+export const checkAdmin = (req, res, next) => {
+  const { role } = req.body;
+  if (role !== "admin") {
+    res.status(400).send("admin  bisg");
+  } else {
+    next();
+  }
+};

@@ -34,7 +34,7 @@ export const createlink = async (req, res) => {
 
 export const deletelink = async (req, res) => {
   try {
-    const { id } = req.params;
+    const {id} = req.params
     const link = await Link.findByIdAndRemove({ _id: id });
     res.status(200).send({
       success: true,

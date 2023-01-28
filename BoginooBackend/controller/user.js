@@ -17,14 +17,6 @@ export const getAllUsers = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
-    const token = jwt.sign(
-      { name: req.body.email, age: req.body.password },
-      "secretkey",
-      {
-        expiresIn: "100000",
-      }
-    );
-
     const user = await User.create({ ...req.body, token: token });
     console.log(user);
     res.status(200).send({
@@ -45,6 +37,7 @@ export const userLogIn = async (req, res) => {
       {
         email: req.body.email,
         password: req.body.password,
+        token: req.body.role
       },
       "secretkey",
       {
@@ -98,7 +91,7 @@ export const userById = async (req, res) => {
 export const removeUser = async (req, res) => {
   try {
     const id = req.params;
-    const user = await User.deleteOne(id);
+    const user = await User.findByIdAndDelete({_id : id});
     res.status(200).send({
       success: "succesfully removed",
       data: id,

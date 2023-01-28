@@ -13,8 +13,13 @@ const UserSchema = new mongoose.Schema(
     },
     token: {
       type: String,
-      
     },
+    role: {
+      type: String,
+      enum: ["casual", "admin"],
+      default:["casual"],
+      required:[true]
+    }
 
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
