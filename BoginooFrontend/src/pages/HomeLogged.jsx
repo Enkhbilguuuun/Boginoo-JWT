@@ -3,7 +3,6 @@ import React from "react";
 import { useState } from "react";
 import Result from "./Result";
 import { instance } from "../App";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import HisShow from "./HistoryShow"
@@ -32,9 +31,9 @@ const params = useParams();
     setHistory(ras.data.data.links)
   };
   useEffect(() => {
-   getUser()
-   getHistory()
-  },[]);
+    getUser()
+    getHistory()
+  },[history])
 console.log()
   return (
     <div>

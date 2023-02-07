@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 
 export const getAlllinks = async (req, res) => {
   try {
-    const link = await Link.find({});
+    const link = await Link.find({}).limit(3).skip(1);
     res.status(200).send({
       data: link,
     });
@@ -19,7 +19,7 @@ export const createlink = async (req, res) => {
   try {
     // const owner = res.locals.userId;
     const shortlink = nanoid(4); //=> "V1StGXR8_Z5jdHi6B-myT"
-    const link = await await Link.create({ ...req.body, Shortlink: shortlink });
+    const link = await Link.create({ ...req.body, Shortlink: shortlink });
     res.status(200).send({
       success: true,
       data: link,
@@ -34,7 +34,7 @@ export const createlink = async (req, res) => {
 
 export const deletelink = async (req, res) => {
   try {
-    const {id} = req.params
+    const { id } = req.params;
     const link = await Link.findByIdAndRemove({ _id: id });
     res.status(200).send({
       success: true,

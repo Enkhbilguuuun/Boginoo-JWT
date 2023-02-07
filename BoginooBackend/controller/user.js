@@ -17,7 +17,7 @@ export const getAllUsers = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
-    const user = await User.create({ ...req.body, token: token });
+    const user = await User.create({ ...req.body });
     console.log(user);
     res.status(200).send({
       status: "complete",
@@ -37,7 +37,6 @@ export const userLogIn = async (req, res) => {
       {
         email: req.body.email,
         password: req.body.password,
-        token: req.body.role
       },
       "secretkey",
       {
@@ -91,7 +90,7 @@ export const userById = async (req, res) => {
 export const removeUser = async (req, res) => {
   try {
     const id = req.params;
-    const user = await User.findByIdAndDelete({_id : id});
+    const user = await User.findByIdAndDelete({ _id: id });
     res.status(200).send({
       success: "succesfully removed",
       data: id,

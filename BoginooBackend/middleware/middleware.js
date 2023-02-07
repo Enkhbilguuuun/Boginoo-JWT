@@ -31,9 +31,11 @@ export const verifyJWT = (req, res, next) => {
 
 export const checkAdmin = (req, res, next) => {
   const { role } = req.body;
+  console.log(role, "this is role");
   if (role !== "admin") {
-    res.status(400).send("admin  bisg");
+    res.status(403).send("admin  bisg");
   } else {
+    res.status(200).send(role)
     next();
   }
 };

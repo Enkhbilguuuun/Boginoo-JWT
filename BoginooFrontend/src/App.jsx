@@ -10,8 +10,10 @@ import HomeLogged from './pages/HomeLogged';
 export const instance = axios.create({
   baseURL: "http://localhost:8000",
   headers: {
+    "Authorization": "authorizationToken",
     "Content-type": "application/json; charset=UTF-8",
   },
+  
 });
 
 
